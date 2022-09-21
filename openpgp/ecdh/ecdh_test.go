@@ -9,11 +9,11 @@ package ecdh
 import (
 	"bytes"
 	"crypto/rand"
-	"github.com/ProtonMail/go-crypto/openpgp/internal/ecc"
+	"github.com/rohautl/go-crypto/openpgp/internal/ecc"
 	"io"
 	"testing"
 
-	"github.com/ProtonMail/go-crypto/openpgp/internal/algorithm"
+	"github.com/rohautl/go-crypto/openpgp/internal/algorithm"
 )
 
 func TestCurves(t *testing.T) {
@@ -72,7 +72,6 @@ func testEncryptDecrypt(t *testing.T, priv *PrivateKey, oid, fingerprint []byte)
 		t.Errorf("decryption failed, got: %x, want: %x", message2, message)
 	}
 }
-
 
 func testValidation(t *testing.T, priv *PrivateKey) {
 	if err := Validate(priv); err != nil {

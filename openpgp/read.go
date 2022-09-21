@@ -3,18 +3,19 @@
 // license that can be found in the LICENSE file.
 
 // Package openpgp implements high level operations on OpenPGP messages.
-package openpgp // import "github.com/ProtonMail/go-crypto/openpgp"
+package openpgp // import "github.com/rohautl/go-crypto/openpgp"
 
 import (
 	"crypto"
 	_ "crypto/sha256"
+	"fmt"
 	"hash"
 	"io"
 	"strconv"
 
-	"github.com/ProtonMail/go-crypto/openpgp/armor"
-	"github.com/ProtonMail/go-crypto/openpgp/errors"
-	"github.com/ProtonMail/go-crypto/openpgp/packet"
+	"github.com/rohautl/go-crypto/openpgp/armor"
+	"github.com/rohautl/go-crypto/openpgp/errors"
+	"github.com/rohautl/go-crypto/openpgp/packet"
 )
 
 // SignatureType is the armor type for a PGP signature.
@@ -84,6 +85,7 @@ type keyEnvelopePair struct {
 // verification) and, possibly encrypted, private keys for decrypting.
 // If config is nil, sensible defaults will be used.
 func ReadMessage(r io.Reader, keyring KeyRing, prompt PromptFunction, config *packet.Config) (md *MessageDetails, err error) {
+	fmt.Println("CUSTOM READMESSAGE STARTED")
 	var p packet.Packet
 
 	var symKeys []*packet.SymmetricKeyEncrypted
@@ -113,6 +115,7 @@ ParsePackets:
 		case *packet.EncryptedKey:
 			// This packet contains the decryption key encrypted to a public key.
 			md.EncryptedToKeyIds = append(md.EncryptedToKeyIds, p.KeyId)
+			fmt.Printf("ADD ENCRYPTED TO KET IDS: %d\n", p.KeyId)
 			switch p.Algo {
 			case packet.PubKeyAlgoRSA, packet.PubKeyAlgoRSAEncryptOnly, packet.PubKeyAlgoElGamal, packet.PubKeyAlgoECDH:
 				break
@@ -270,6 +273,7 @@ FindLiteralData:
 
 			md.IsSigned = true
 			md.SignedByKeyId = p.KeyId
+			fmt.Printf("Message is signed by KeyID: %d\n", md.SignedByKeyId)
 			if keyring != nil {
 				keys := keyring.KeysByIdUsage(p.KeyId, packet.KeyFlagSign)
 				if len(keys) > 0 {

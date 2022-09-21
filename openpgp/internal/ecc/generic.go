@@ -5,9 +5,10 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"fmt"
-	"github.com/ProtonMail/go-crypto/openpgp/errors"
 	"io"
 	"math/big"
+
+	"github.com/rohautl/go-crypto/openpgp/errors"
 )
 
 type genericCurve struct {

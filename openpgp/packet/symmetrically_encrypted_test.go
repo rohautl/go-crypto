@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/hex"
-	"github.com/ProtonMail/go-crypto/openpgp/errors"
+	"github.com/rohautl/go-crypto/openpgp/errors"
 	"io"
 	"io/ioutil"
 	"testing"

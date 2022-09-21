@@ -9,8 +9,8 @@ import (
 	"encoding/binary"
 	"io"
 
-	"github.com/ProtonMail/go-crypto/openpgp/errors"
-	"github.com/ProtonMail/go-crypto/openpgp/internal/algorithm"
+	"github.com/rohautl/go-crypto/openpgp/errors"
+	"github.com/rohautl/go-crypto/openpgp/internal/algorithm"
 )
 
 // AEADEncrypted represents an AEAD Encrypted Packet (tag 20, RFC4880bis-5.16).
@@ -127,7 +127,7 @@ func (ar *aeadDecrypter) Read(dst []byte) (n int, err error) {
 	// Read a chunk
 	tagLen := ar.aead.Overhead()
 	cipherChunkBuf := new(bytes.Buffer)
-	_, errRead := io.CopyN(cipherChunkBuf, ar.reader, int64(ar.chunkSize + tagLen))
+	_, errRead := io.CopyN(cipherChunkBuf, ar.reader, int64(ar.chunkSize+tagLen))
 	cipherChunk := cipherChunkBuf.Bytes()
 	if errRead != nil && errRead != io.EOF {
 		return 0, errRead

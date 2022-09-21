@@ -5,9 +5,9 @@ package integrationtests
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/ProtonMail/go-crypto/openpgp"
-	"github.com/ProtonMail/go-crypto/openpgp/armor"
-	"github.com/ProtonMail/go-crypto/openpgp/packet"
+	"github.com/rohautl/go-crypto/openpgp"
+	"github.com/rohautl/go-crypto/openpgp/armor"
+	"github.com/rohautl/go-crypto/openpgp/packet"
 	"io"
 	"io/ioutil"
 	"os"

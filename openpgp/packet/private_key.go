@@ -18,13 +18,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ProtonMail/go-crypto/openpgp/ecdh"
-	"github.com/ProtonMail/go-crypto/openpgp/ecdsa"
-	"github.com/ProtonMail/go-crypto/openpgp/eddsa"
-	"github.com/ProtonMail/go-crypto/openpgp/elgamal"
-	"github.com/ProtonMail/go-crypto/openpgp/errors"
-	"github.com/ProtonMail/go-crypto/openpgp/internal/encoding"
-	"github.com/ProtonMail/go-crypto/openpgp/s2k"
+	"github.com/rohautl/go-crypto/openpgp/ecdh"
+	"github.com/rohautl/go-crypto/openpgp/ecdsa"
+	"github.com/rohautl/go-crypto/openpgp/eddsa"
+	"github.com/rohautl/go-crypto/openpgp/elgamal"
+	"github.com/rohautl/go-crypto/openpgp/errors"
+	"github.com/rohautl/go-crypto/openpgp/internal/encoding"
+	"github.com/rohautl/go-crypto/openpgp/s2k"
 )
 
 // PrivateKey represents a possibly encrypted private key. See RFC 4880,

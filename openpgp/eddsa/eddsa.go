@@ -4,12 +4,13 @@ package eddsa
 
 import (
 	"errors"
-	"github.com/ProtonMail/go-crypto/openpgp/internal/ecc"
 	"io"
+
+	"github.com/rohautl/go-crypto/openpgp/internal/ecc"
 )
 
 type PublicKey struct {
-	X []byte
+	X     []byte
 	curve ecc.EdDSACurve
 }
 
