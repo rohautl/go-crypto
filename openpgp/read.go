@@ -170,7 +170,10 @@ FindKey:
 					}
 				}
 				// Try to decrypt symmetrically encrypted
+				fmt.Println("before decrypt 1")
 				decrypted, err = edp.Decrypt(pk.encryptedKey.CipherFunc, pk.encryptedKey.Key)
+				fmt.Println("after decrypt 1")
+
 				if err != nil && err != errors.ErrKeyIncorrect {
 					return nil, err
 				}
@@ -180,6 +183,7 @@ FindKey:
 				}
 			} else {
 				fpr := string(pk.key.PublicKey.Fingerprint[:])
+				fmt.Printf("fpr dans le else: %s\n", fpr)
 				if v := candidateFingerprints[fpr]; v {
 					continue
 				}
@@ -189,6 +193,7 @@ FindKey:
 		}
 
 		if len(candidates) == 0 && len(symKeys) == 0 {
+			fmt.Printf("CANDIDATES et SYMKEYS vides ! \n")
 			return nil, errors.ErrKeyIncorrect
 		}
 
