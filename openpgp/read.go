@@ -108,6 +108,8 @@ ParsePackets:
 			return nil, err
 		}
 		switch p := p.(type) {
+		case *packet.PublicKey:
+			fmt.Printf("PUBLIC KEY PACKET: %w\n", p)
 		case *packet.SymmetricKeyEncrypted:
 			// This packet contains the decryption key encrypted with a passphrase.
 			md.IsSymmetricallyEncrypted = true
