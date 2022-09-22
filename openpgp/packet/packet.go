@@ -4,16 +4,17 @@
 
 // Package packet implements parsing and serialization of OpenPGP packets, as
 // specified in RFC 4880.
-package packet // import "github.com/rohautl/go-crypto/openpgp/packet"
+package packet // import "github.com/ProtonMail/go-crypto/openpgp/packet"
 
 import (
 	"bytes"
 	"crypto/cipher"
 	"crypto/rsa"
+	"fmt"
 	"io"
 
-	"github.com/rohautl/go-crypto/openpgp/errors"
-	"github.com/rohautl/go-crypto/openpgp/internal/algorithm"
+	"github.com/ProtonMail/go-crypto/openpgp/errors"
+	"github.com/ProtonMail/go-crypto/openpgp/internal/algorithm"
 )
 
 // readFull is the same as io.ReadFull except that reading zero bytes returns
@@ -349,6 +350,7 @@ func Read(r io.Reader) (p Packet, err error) {
 		}
 		p = pk
 	case packetTypePublicKey, packetTypePublicSubkey:
+		fmt.Printf("Packet.go: %w\n", p)
 		isSubkey := tag == packetTypePublicSubkey
 		p = &PublicKey{IsSubkey: isSubkey}
 	case packetTypeCompressed:
