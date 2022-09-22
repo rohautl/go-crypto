@@ -173,7 +173,7 @@ FindKey:
 				}
 				// Try to decrypt symmetrically encrypted
 				decrypted, err = edp.Decrypt(pk.encryptedKey.CipherFunc, pk.encryptedKey.Key)
-
+				fmt.Printf("decrypted: %s\n", decrypted)
 				if err != nil && err != errors.ErrKeyIncorrect {
 					return nil, err
 				}
