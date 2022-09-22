@@ -163,6 +163,8 @@ FindKey:
 				continue
 			}
 			if !pk.key.PrivateKey.Encrypted {
+				fmt.Printf("fpr dans le else: %w\n", pk.encryptedKey)
+
 				if len(pk.encryptedKey.Key) == 0 {
 					errDec := pk.encryptedKey.Decrypt(pk.key.PrivateKey, config)
 					if errDec != nil {
@@ -170,9 +172,7 @@ FindKey:
 					}
 				}
 				// Try to decrypt symmetrically encrypted
-				fmt.Println("before decrypt 1")
 				decrypted, err = edp.Decrypt(pk.encryptedKey.CipherFunc, pk.encryptedKey.Key)
-				fmt.Println("after decrypt 1")
 
 				if err != nil && err != errors.ErrKeyIncorrect {
 					return nil, err
