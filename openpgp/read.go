@@ -116,6 +116,8 @@ ParsePackets:
 			// This packet contains the decryption key encrypted to a public key.
 			md.EncryptedToKeyIds = append(md.EncryptedToKeyIds, p.KeyId)
 			fmt.Printf("ADD ENCRYPTED TO KET IDS: %d\n", p.KeyId)
+			fmt.Printf("P (packet ?): %w\n", p)
+
 			switch p.Algo {
 			case packet.PubKeyAlgoRSA, packet.PubKeyAlgoRSAEncryptOnly, packet.PubKeyAlgoElGamal, packet.PubKeyAlgoECDH:
 				break
