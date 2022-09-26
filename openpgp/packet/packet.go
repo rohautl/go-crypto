@@ -371,10 +371,11 @@ func Read(r io.Reader) (p Packet, err error) {
 		}
 		p = pk
 	case packetTypePublicKey, packetTypePublicSubkey:
-		fmt.Printf("Packet.go: %w\n", p)
-		fmt.Printf("Packet.go 2: %s\n", p)
 		isSubkey := tag == packetTypePublicSubkey
 		p = &PublicKey{IsSubkey: isSubkey}
+		fmt.Printf("Packet.go: %w\n", p)
+		fmt.Printf("Packet.go 2: %s\n", p)
+
 	case packetTypeCompressed:
 		p = new(Compressed)
 	case packetTypeSymmetricallyEncrypted:
@@ -399,14 +400,7 @@ func Read(r io.Reader) (p Packet, err error) {
 		fmt.Printf("Error after parse contents: %s\n", err)
 	}
 	if err != nil {
-		if tag == packetTypePublicKey {
-			fmt.Printf("CUSTOM CONSUME \n")
-			consumeAllCustom(contents)
-		} else {
-			consumeAll(contents)
-		}
-	} else {
-		fmt.Println("ERROR WAS NOT NIL AFTER PARSE CONTENT")
+		consumeAll(contents)
 	}
 	return
 }
