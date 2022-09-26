@@ -333,6 +333,7 @@ func Read(r io.Reader) (p Packet, err error) {
 	if err != nil {
 		return
 	}
+	fmt.Printf("Global Packet.go: %w\n", p)
 
 	switch tag {
 	case packetTypeEncryptedKey:
