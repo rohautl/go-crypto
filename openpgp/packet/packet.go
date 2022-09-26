@@ -299,6 +299,8 @@ func consumeAll(r io.Reader) (n int64, err error) {
 }
 
 func consumeAllCustom(r io.Reader) (n int64, err error) {
+	fmt.Printf("consumeallcustom started\n")
+
 	var m int
 	var buf [1024]byte
 
@@ -312,7 +314,7 @@ func consumeAllCustom(r io.Reader) (n int64, err error) {
 		if err != nil {
 			return
 		}
-		fmt.Printf("message: %s\n", buf)
+		fmt.Printf("consumeallcustom: %s\n", buf)
 	}
 }
 
@@ -401,6 +403,8 @@ func Read(r io.Reader) (p Packet, err error) {
 			consumeAllCustom(contents)
 		}
 		consumeAll(contents)
+	} else {
+		fmt.Println("ERROR WAS NOT NIL AFTER PARSE CONTENT")
 	}
 	return
 }
