@@ -298,6 +298,24 @@ func consumeAll(r io.Reader) (n int64, err error) {
 	}
 }
 
+func consumeAllCustom(r io.Reader) (n int64, err error) {
+	var m int
+	var buf [1024]byte
+
+	for {
+		m, err = r.Read(buf[:])
+		n += int64(m)
+		if err == io.EOF {
+			err = nil
+			return
+		}
+		if err != nil {
+			return
+		}
+		fmt.Printf("message: %s\n", buf)
+	}
+}
+
 // packetType represents the numeric ids of the different OpenPGP packet types. See
 // http://www.iana.org/assignments/pgp-parameters/pgp-parameters.xhtml#pgp-parameters-2
 type packetType uint8
@@ -352,6 +370,7 @@ func Read(r io.Reader) (p Packet, err error) {
 		p = pk
 	case packetTypePublicKey, packetTypePublicSubkey:
 		fmt.Printf("Packet.go: %w\n", p)
+		fmt.Printf("Packet.go 2: %s\n", p)
 		isSubkey := tag == packetTypePublicSubkey
 		p = &PublicKey{IsSubkey: isSubkey}
 	case packetTypeCompressed:
@@ -377,6 +396,9 @@ func Read(r io.Reader) (p Packet, err error) {
 		err = p.parse(contents)
 	}
 	if err != nil {
+		if tag == packetTypePublicKey {
+			consumeAllCustom(contents)
+		}
 		consumeAll(contents)
 	}
 	return
