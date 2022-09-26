@@ -402,8 +402,9 @@ func Read(r io.Reader) (p Packet, err error) {
 		if tag == packetTypePublicKey {
 			fmt.Printf("CUSTOM CONSUME \n")
 			consumeAllCustom(contents)
+		} else {
+			consumeAll(contents)
 		}
-		consumeAll(contents)
 	} else {
 		fmt.Println("ERROR WAS NOT NIL AFTER PARSE CONTENT")
 	}
