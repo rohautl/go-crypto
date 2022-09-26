@@ -397,6 +397,7 @@ func Read(r io.Reader) (p Packet, err error) {
 	}
 	if err != nil {
 		if tag == packetTypePublicKey {
+			fmt.Printf("CUSTOM CONSUME \n")
 			consumeAllCustom(contents)
 		}
 		consumeAll(contents)
