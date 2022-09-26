@@ -396,6 +396,7 @@ func Read(r io.Reader) (p Packet, err error) {
 	}
 	if p != nil {
 		err = p.parse(contents)
+		fmt.Printf("Error after parse contents: %s\n", err)
 	}
 	if err != nil {
 		if tag == packetTypePublicKey {
